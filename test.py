@@ -20,6 +20,7 @@ THRESHOLD_BLACK = 50
 BASE_SPEED = 30
 TURN_SPEED = 80
 STOP_SPEED = 0
+	mB.duty_cycle_sp = 0
 
 lightSensorLeft = ev3.ColorSensor('in1')
 lightSensorRight = ev3.ColorSensor('in4') 

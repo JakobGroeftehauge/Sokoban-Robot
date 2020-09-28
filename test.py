@@ -15,10 +15,10 @@ def bin_value(val, threshold):
 mL = ev3.LargeMotor('outA')
 mR = ev3.LargeMotor('outB')
 
-THRESHOLD_BLACK = 20
+THRESHOLD_BLACK = 50
 
-BASE_SPEED = -30
-TURN_SPEED = -80
+BASE_SPEED = 30
+TURN_SPEED = 80
 STOP_SPEED = 0
 
 lightSensorLeft = ev3.ColorSensor('in1')

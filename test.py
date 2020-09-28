@@ -8,7 +8,7 @@ import signal
 def bin_value(val, threshold):
     if val > threshold: 
         return 1 
-    else 
+    else: 
         return 0 
 
 
@@ -20,7 +20,6 @@ THRESHOLD_BLACK = 50
 BASE_SPEED = 30
 TURN_SPEED = 80
 STOP_SPEED = 0
-	mB.duty_cycle_sp = 0
 
 lightSensorLeft = ev3.ColorSensor('in1')
 lightSensorRight = ev3.ColorSensor('in4') 
@@ -53,7 +52,6 @@ while True:
 	sensorRight = bin_val(lightSensorRight.value(), THRESHOLD_BLACK)
 	
     if sensorRight == 0 and sensorRight == 0: 
-        # Next state
         mR.duty_cycle_sp = STOP_SPEED
 		mL.duty_cycle_sp = STOP_SPEED
     elif sensorRight == 1 and sensorRight == 1:

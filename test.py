@@ -51,16 +51,16 @@ while True:
     sensorLeft = bin_val(lightSensorLeft.value(), THRESHOLD_BLACK)
 	sensorRight = bin_val(lightSensorRight.value(), THRESHOLD_BLACK)
 	
-    if sensorRight == 0 and sensorRight == 0: 
+    if sensorRight == 0 and sensorLeft == 0: 
         mR.duty_cycle_sp = STOP_SPEED
 		mL.duty_cycle_sp = STOP_SPEED
-    elif sensorRight == 1 and sensorRight == 1:
+    elif sensorRight == 1 and sensorLeft == 1:
         mR.duty_cycle_sp = TURN_SPEED
 		mL.duty_cycle_sp = TURN_SPEED
-    elif sensorRight == 1 and sensorRight == 0: 
+    elif sensorRight == 1 and sensorLeft == 0: 
         mR.duty_cycle_sp = BASE_SPEED
 		mL.duty_cycle_sp = TURN_SPEED
-    else sensorRight == 0 and sensorRight == 1: 
+    else sensorRight == 0 and sensorLeft == 1: 
         mR.duty_cycle_sp = TURN_SPEED
 		mL.duty_cycle_sp = BASE_SPEED
 

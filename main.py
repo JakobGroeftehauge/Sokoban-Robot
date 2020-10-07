@@ -21,19 +21,16 @@ def main():
         
         if(current_action == FORWARD):
             move_forward()
-            print(current_action)
             current_action = decoder.get_next_action()
             
 
         elif(current_action == LEFT): 
             turn_left()
-            print(current_action)
             current_action = decoder.get_next_action()
             
 
         elif(current_action == RIGHT): 
             turn_right() 
-            print(current_action)
             current_action = decoder.get_next_action()
             
             

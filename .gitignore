@@ -1,3 +1,5 @@
-# Igonore files of type: 
-
+# igonore files of type: 
 *.pyc
+
+# ignore the following folders: 
+.vscode/

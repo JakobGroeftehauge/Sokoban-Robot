@@ -10,8 +10,8 @@ public:
     coordinate operator + (coordinate const &obj);
     void operator * (int number);
     bool operator == (coordinate const &obj);
-    int x;
-    int y;
+    int x = -1;
+    int y = -1;
 };
 
 #endif // COORDINATE_H

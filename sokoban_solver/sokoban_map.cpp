@@ -24,17 +24,17 @@ sokoban_map::sokoban_map(std::vector<std::vector<char>> map, std::vector<coordin
     }
 }
 
-bool sokoban_map::map_completed(sokoban_state state)
+bool sokoban_map::map_completed(sokoban_state* state)
 {
-    for(int i = 0; i < state.box_positions.size(); i++)
+    for(unsigned int i = 0; i < state->box_positions.size(); i++)
     {
         bool match_found = false;
         for(int j = 0; j < this->storage_zones.size(); j++)
         {
-            if(state.box_positions[i] == this->storage_zones[j])
+            if(state->box_positions[i] == this->storage_zones[j])
             {
                 match_found = true;
-                break;
+                continue;
             }
         }
 
@@ -46,7 +46,7 @@ bool sokoban_map::map_completed(sokoban_state state)
     return true;
 }
 
-bool sokoban_map::next_state(sokoban_state current_state, std::string action, sokoban_state &next_state)
+bool sokoban_map::next_state(sokoban_state current_state, std::string action, sokoban_state& next_state)
 {
 
     coordinate move = action_to_vector[action];
@@ -60,7 +60,7 @@ bool sokoban_map::next_state(sokoban_state current_state, std::string action, so
     }
 
     // Check if new position is on top of box
-    int colliding_box_index;
+   int colliding_box_index;
    if(on_top_box(new_position, current_state.box_positions, colliding_box_index))
     {
         coordinate new_position_box = new_position + move;
@@ -78,15 +78,20 @@ bool sokoban_map::next_state(sokoban_state current_state, std::string action, so
             std::vector<coordinate> updated_box_postions = current_state.box_positions;
             updated_box_postions[colliding_box_index] = new_position_box;
             next_state = sokoban_state(new_position, updated_box_postions);
+//            next_state.player_postion = new_position; //coordinate(new_position.x, new_position.y);
+//            next_state.box_positions = current_state.box_positions;
+//            next_state.generate_unique_key();
             return true;
         }
     }
     else
     {
-        next_state = sokoban_state(new_position, current_state.box_positions);
+       next_state = sokoban_state(new_position, current_state.box_positions);
+//       next_state.player_postion = new_position;  //coordinate(new_position.x, new_position.y);
+//       next_state.box_positions = current_state.box_positions;
+//       next_state.generate_unique_key();
+       return true;
     }
-
-   return true;
 }
 
 void sokoban_map::print_map(sokoban_state state)

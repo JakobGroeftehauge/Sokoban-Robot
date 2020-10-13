@@ -4,4 +4,4 @@
 # ignore the following folders: 
 .vscode/
 build-sokoban_solver-Desktop-Debug/
-
+build-sokoban_solver-Desktop-Release/

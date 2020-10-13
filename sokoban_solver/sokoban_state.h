@@ -12,6 +12,9 @@ public:
     sokoban_state(coordinate player_postion, std::vector<coordinate> box_positions);
     std::vector<coordinate> box_positions;
     coordinate player_postion;
+    std::string unique_key;
+    void generate_unique_key();
+
     friend std::ostream& operator <<(std::ostream& os, const sokoban_state& state);
 };
 

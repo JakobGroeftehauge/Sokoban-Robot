@@ -11,8 +11,8 @@ class sokoban_map
 {
 public:
     sokoban_map(std::vector<std::vector<char>> map, std::vector<coordinate> storage_zones);
-    bool map_completed(sokoban_state state);
-    bool next_state(sokoban_state current_state, std::string action, sokoban_state &next_state);
+    bool map_completed(sokoban_state* state);
+    bool next_state(sokoban_state current_state, std::string action, sokoban_state& next_state);
     void print_map(sokoban_state state);
     // Attributes
     std::vector<std::vector<char>> map;

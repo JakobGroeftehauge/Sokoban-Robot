@@ -6,10 +6,12 @@ CONFIG -= qt
 SOURCES += \
         coordinate.cpp \
         main.cpp \
+        node.cpp \
         sokoban_map.cpp \
         sokoban_state.cpp
 
 HEADERS += \
     coordinate.h \
+    node.h \
     sokoban_map.h \
     sokoban_state.h

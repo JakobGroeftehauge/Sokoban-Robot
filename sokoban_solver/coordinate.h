@@ -10,6 +10,7 @@ public:
     coordinate operator + (coordinate const &obj);
     void operator * (int number);
     bool operator == (coordinate const &obj);
+    bool operator<(const coordinate& r);
     int x = -1;
     int y = -1;
 };

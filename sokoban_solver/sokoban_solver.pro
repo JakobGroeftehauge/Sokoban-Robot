@@ -11,6 +11,7 @@ SOURCES += \
         sokoban_state.cpp
 
 HEADERS += \
+    Timer.h \
     coordinate.h \
     node.h \
     sokoban_map.h \

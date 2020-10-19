@@ -1,4 +1,3 @@
-#pragma once
 #include "sokoban_map.h"
 #include <iostream>
 #include <map>
@@ -29,7 +28,7 @@ bool sokoban_map::map_completed(sokoban_state* state)
     for(unsigned int i = 0; i < state->box_positions.size(); i++)
     {
         bool match_found = false;
-        for(int j = 0; j < this->storage_zones.size(); j++)
+        for(unsigned int j = 0; j < this->storage_zones.size(); j++)
         {
             if(state->box_positions[i] == this->storage_zones[j])
             {
@@ -98,16 +97,16 @@ void sokoban_map::print_map(sokoban_state state)
 {
     std::vector<std::vector<char>> env = this->map;
     env[state.player_postion.x][state.player_postion.y] = 'M';
-    for(int i = 0; i < state.box_positions.size(); i++)
+    for(unsigned int i = 0; i < state.box_positions.size(); i++)
     {
         int x = state.box_positions[i].x;
         int y = state.box_positions[i].y;
         env[x][y] = 'J';
     }
 
-    for(int i = 0; i < env.size(); i++)
+    for(unsigned int i = 0; i < env.size(); i++)
     {
-        for(int j = 0; j < env[i].size(); j++)
+        for(unsigned int j = 0; j < env[i].size(); j++)
         {
             std::cout << env[i][j];
         }
@@ -118,7 +117,7 @@ void sokoban_map::print_map(sokoban_state state)
 bool sokoban_map::valid_map()
 {
     // Check if all map lists in the map vector is equal lenght
-    for(int i = 0; i < this->map.size() - 1; i++)
+    for(unsigned int i = 0; i < this->map.size() - 1; i++)
     {
         if(this->map[i].size() != this->map[i +1].size())
         {
@@ -127,7 +126,7 @@ bool sokoban_map::valid_map()
     }
 
     // Ensure storage zones is not placed in walls
-    for(int i = 0; i < this->storage_zones.size(); i++)
+    for(unsigned int i = 0; i < this->storage_zones.size(); i++)
     {
         if(!valid_position(this->storage_zones[i]))
         {
@@ -135,7 +134,7 @@ bool sokoban_map::valid_map()
         }
 
         bool identical_pos_found = false;
-        for(int j = i + 1; j < this->storage_zones.size(); j++)
+        for(unsigned int j = i + 1; j < this->storage_zones.size(); j++)
         {
             if(this->storage_zones[i] == this->storage_zones[j])
             {
@@ -166,7 +165,7 @@ bool sokoban_map::valid_position(coordinate position)
 
 bool sokoban_map::on_top_box(coordinate position, std::vector<coordinate> box_positions, int &out_box_index)
 {
-    for(int i = 0; i < box_positions.size() ; i++)
+    for(unsigned int i = 0; i < box_positions.size() ; i++)
     {
         if(position == box_positions[i])
         {

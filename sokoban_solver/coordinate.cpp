@@ -35,3 +35,12 @@ bool coordinate::operator ==(const coordinate &obj)
     }
     return false;
 }
+
+bool coordinate::operator<(const coordinate &r)
+{
+    if(this->x == r.x)
+    {
+        return this->y < r.y;
+    }
+    return this->x < r.x;
+}

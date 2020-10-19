@@ -23,7 +23,7 @@ print('Press Ctrl+C to exit')
 try:
     # Follow the line for 4500ms
     tank.follow_line(
-        kp=1, ki=0, kd=0,
+        kp=11.3, ki=0.05, kd=3.2,
         speed=SpeedPercent(10),
         target_light_intensity=37,
         follow_left_edge = False,

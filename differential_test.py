@@ -1,11 +1,6 @@
 from ev3dev2.motor import OUTPUT_A, OUTPUT_B, MoveDifferential, SpeedRPM
 from ev3dev2.wheel import EV3Tire
 
-#width_mm = 28
-#diameter_mm = 56
-#tire = Wheel(diameter_mm, width_mm)
-EV3Tire.diameter_mm = 56 * 2
-EV3Tire.width_mm = 28
 STUD_MM = 8
 
 # test with a robot that:

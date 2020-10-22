@@ -29,6 +29,26 @@ using namespace std;
 //                               "right", "down", "left", "left", "down", "left", "left", "up", "right", "right", "right", "right", "right", "down", "right", "up", "up", "right", "up", "up", "left", "left", "down", "right", "up", "right", "down", "up", "right", "right", "down", "left", "up", "left", "left", "down", "down", "down", "left", "left", "up", "left", "up", "left", "down", "right", "down", "left", "down", "left",
 //                               "left", "up", "right", "right", "right", "right", "right", "down", "right", "up", "up", "down", "left", "left", "up", "left", "up", "left", "left", "down", "right", "down", "down", "left", "left", "up", "right", "right", "right", "right", "right", "down", "right", "up"};
 
+bool crate_position_not_changed(sokoban_state state1, sokoban_state state2)
+{
+    for(unsigned int i = 0; i < state1.box_positions.size(); i++)
+    {
+        bool match_found = false;
+        for(unsigned int j = 0; j < state2.box_positions.size(); j++)
+        {
+            if(state1.box_positions[i] == state2.box_positions[j])
+            {
+                match_found = true;
+                break;
+            }
+        }
+        if(match_found == false)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 int main()
 {
@@ -131,6 +151,10 @@ int main()
     while(temp_node->parent_state != NULL)
     {
         solution.push_back(temp_node->action_to_current_state());
+        if(!crate_position_not_changed(temp_node->state, temp_node->parent_state->state))
+        {
+            solution.push_back('.');
+        }
         //std::cout << temp_node->action_to_current_state() << std::endl;
         temp_node = temp_node->parent_state;
     }

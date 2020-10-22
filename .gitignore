@@ -1,5 +1,7 @@
 # igonore files of type: 
 *.pyc
+*.pro
+*.pro.user
 
 # ignore the following folders: 
 .vscode/

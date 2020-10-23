@@ -72,9 +72,9 @@ def test_decoder():
 
     print(decoder.actions)
     test = 1
-    while test != -1:
-        test = decoder.get_next_action()
-        print(test)
+    # while test != -1:
+    #     test = decoder.get_next_action()
+    #     print(test)
 
 
 if __name__ == "__main__":

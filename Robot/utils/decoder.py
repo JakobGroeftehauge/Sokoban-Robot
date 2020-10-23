@@ -20,14 +20,25 @@ class Decoder:
     def expand_actions(self, actions, initial_direction='u'):
         expanded_list_actions = ""
         current_direction = initial_direction
-        for i in range(len(actions)):  
-            # If actions is c. The can is being manipulated. take care of.  
 
+        i = 0
+        while i < len(actions):
+            temp_action = ""
+
+            if(actions[i] == "."):
+                if i < len(actions) - 2:
+                    if not actions[i + 2] == '.':
+                        temp_action = "fb"
+                else: 
+                    temp_action = "f"
+                    
+                i = i + 1
             if not current_direction == actions[i]: 
                 expanded_list_actions = expanded_list_actions + self.get_action(current_direction, actions[i])
-            expanded_list_actions = expanded_list_actions + 'f'
+            expanded_list_actions = expanded_list_actions + 'f' + temp_action
             current_direction = actions[i]
-        
+            i = i + 1
+
         return expanded_list_actions
 
     def get_action(self, current_direction, wanted_direction):
@@ -56,8 +67,8 @@ class Decoder:
             return "r" 
     
 def test_decoder():
-    DEFINED_ACTIONS = ['l', 'r', 'u', 'd', 'f']
-    decoder = Decoder("llrrurur", DEFINED_ACTIONS)
+    DEFINED_ACTIONS = ['l', 'r', 'b', 'f']
+    decoder = Decoder('llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u', DEFINED_ACTIONS)
 
     print(decoder.actions)
     test = 1

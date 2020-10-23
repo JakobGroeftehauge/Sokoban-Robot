@@ -14,9 +14,10 @@ FORWARD_GYRO = "f"
 BACKWARD = "b"
 LEFT = "l"
 RIGHT = "r"
+ONE_EIGHTY = "t"
 NOT_DEFINED = -1
 
-DEFINED_ACTIONS = [FORWARD, LEFT, RIGHT, BACKWARD]
+DEFINED_ACTIONS = [FORWARD, LEFT, RIGHT, BACKWARD, ONE_EIGHTY]
 
 
 
@@ -52,7 +53,8 @@ def main():
 
     # setup decoder and define chain of actions
     #string_of_actions = "fflfrflfffrffr"
-    string_of_actions = "fffblfrffrfrffb" #"ffffrfrfrfblfflffrflfb"
+    #string_of_actions = "fffblfrffrfrffb" #"ffffrfrfrfblfflffrflfb"
+    string_of_actions = "llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u"
     decoder = Decoder(string_of_actions, DEFINED_ACTIONS)
 
 
@@ -74,6 +76,10 @@ def main():
 
         elif(current_action == BACKWARD):
             move_backward(mDiff, colorSensorStop)
+            current_action = decoder.get_next_action()
+
+        elif(current_action == ONE_EIGHTY):
+            turn_one_eighty(mDiff)
             current_action = decoder.get_next_action()
 
 

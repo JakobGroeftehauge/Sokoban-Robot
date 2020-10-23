@@ -29,11 +29,11 @@ class Decoder:
                 if i < len(actions) - 2:
                     if not actions[i + 2] == '.':
                         temp_action = "fb"
-                else: 
+                else:
                     temp_action = "f"
-                    
+
                 i = i + 1
-            if not current_direction == actions[i]: 
+            if not current_direction == actions[i]:
                 expanded_list_actions = expanded_list_actions + self.get_action(current_direction, actions[i])
             expanded_list_actions = expanded_list_actions + 'f' + temp_action
             current_direction = actions[i]
@@ -46,9 +46,9 @@ class Decoder:
         docstring
         """
         if current_direction == "d" and wanted_direction == "u" or current_direction == "u" and wanted_direction == "d":
-            return "rr"
+            return "t"
         elif current_direction == "r" and wanted_direction == "l" or current_direction == "l" and wanted_direction == "r":
-            return "rr" 
+            return "t"
         elif current_direction == "r" and wanted_direction == "u":
             return "l"
         elif current_direction == "r" and wanted_direction == "d":
@@ -62,10 +62,10 @@ class Decoder:
         elif current_direction == "u" and wanted_direction == "l":
             return "l"
         elif current_direction == "d" and wanted_direction == "l":
-            return "l"
+            return "r"
         elif current_direction == "d" and wanted_direction == "r":
-            return "r" 
-    
+            return "l"
+
 def test_decoder():
     DEFINED_ACTIONS = ['l', 'r', 'b', 'f']
     decoder = Decoder('llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u', DEFINED_ACTIONS)

@@ -41,6 +41,13 @@ def turn_right(mDiff):
     mDiff.turn_right(SpeedRPM(TURN_SPEED), 90)
 
 
+def turn_one_eighty(mDiff):
+    speed = SpeedPercent(DRIVE_SPEED)
+    speed = speed_to_speedvalue(speed)
+    rotations = 0.55
+    mDiff.on_for_rotations(speed, speed, rotations, brake=True, block=True)
+
+    mDiff.turn_left(SpeedRPM(TURN_SPEED), 180)
 
 def move_forward(mDiff, colorSensorStop, colorSensorFollow):
 

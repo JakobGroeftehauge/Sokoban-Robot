@@ -29,6 +29,9 @@ class Decoder:
                 if i < len(actions) - 2:
                     if not actions[i + 2] == '.':
                         temp_action = "fb"
+                    elif i < len(actions) - 3: 
+                        if not actions[i + 1 ] not actions[i + 3]: 
+                            temp_action = "FB
                 else:
                     temp_action = "f"
 

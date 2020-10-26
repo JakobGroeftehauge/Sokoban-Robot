@@ -30,6 +30,9 @@ class Decoder:
                 if i < len(actions) - 2:
                     if not actions[i + 2] == '.':
                         temp_action = "fb"
+                    elif i < len(actions) - 3: 
+                        if not actions[i + 1 ] not actions[i + 3]: 
+                            temp_action = "FB
                 else:
                     temp_action = "f"
 
@@ -73,9 +76,9 @@ def test_decoder():
 
     print(decoder.actions)
     test = 1
-    while test != -1:
-        test = decoder.get_next_action()
-        print(test)
+    # while test != -1:
+    #     test = decoder.get_next_action()
+    #     print(test)
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ DRIVE_SPEED = 40
 STOP_SPEED = 0
 TURN_SPEED = 50
 TURN_ANGLE = 153
-BRAKE_DISTANCE = 40
+BRAKE_DISTANCE = 30
 BRAKE_SPEED = 900
 GEARING = 1.566667
 STOP_LINE = 40
@@ -29,19 +29,19 @@ def sign(val):
 def turn_left(mDiff):
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
-    rotations = 0.7
+    rotations = 0.7 #0.6
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
-    mDiff.turn_left(SpeedRPM(TURN_SPEED), 90)
+    mDiff.turn_left(SpeedRPM(TURN_SPEED), 90) #96
 
 
 def turn_right(mDiff):
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
-    rotations = 0.7
+    rotations = 0.7 #0.6
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
-    mDiff.turn_right(SpeedRPM(TURN_SPEED), 90)
+    mDiff.turn_right(SpeedRPM(TURN_SPEED), 90) #96
 
 
 def turn_one_eighty(mDiff):
@@ -50,7 +50,7 @@ def turn_one_eighty(mDiff):
     rotations = 0.7
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
-    mDiff.turn_left(SpeedRPM(TURN_SPEED), 180)
+    mDiff.turn_left(SpeedRPM(TURN_SPEED), 180) #183
 
 def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
 
@@ -82,6 +82,13 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
         left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
         right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
 
+#        if turn_native_units > 0:
+#            left_speed = SpeedNativeUnits(speed_native_units)
+#            right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
+#        else:
+#            left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
+#            right_speed = SpeedNativeUnits(speed_native_units)
+
         # Have we lost the line?
 #        if reflected_light_intensity >= white:
 #            off_line_count += 1
@@ -105,7 +112,7 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
             raise LineFollowErrorTooFast("The robot is moving too fast to follow the line")
 
     mDiff.stop()
-    spkr.beep()
+#    spkr.beep()
 
 
 
@@ -155,4 +162,4 @@ def move_forward_dual(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight)
             mDiff.on(DRIVE_SPEED, DRIVE_SPEED)
     f.close()
     mDiff.stop()
-    spkr.beep()
+#    spkr.beep()

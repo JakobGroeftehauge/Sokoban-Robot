@@ -1,7 +1,7 @@
 class Decoder:
     def __init__(self, actions, defined_actions):
-        #self.actions = self.expand_actions(actions)
-        self.actions = actions
+        self.actions = self.expand_actions(actions)
+        #self.actions = actions
         self.action_pointer = 0
         self.defined_actions = defined_actions
 
@@ -30,9 +30,9 @@ class Decoder:
                 if i < len(actions) - 2:
                     if not actions[i + 2] == '.':
                         temp_action = "fb"
-                    elif i < len(actions) - 3: 
-                        if not actions[i + 1 ] not actions[i + 3]: 
-                            temp_action = "FB
+                    elif i < len(actions) - 3:
+                        if not actions[i + 1 ] == actions[i + 3]:
+                            temp_action = "fb"
                 else:
                     temp_action = "f"
 

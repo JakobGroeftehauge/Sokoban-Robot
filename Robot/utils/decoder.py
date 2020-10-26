@@ -1,6 +1,7 @@
 class Decoder:
     def __init__(self, actions, defined_actions):
-        self.actions = self.expand_actions(actions)
+        #self.actions = self.expand_actions(actions)
+        self.actions = actions
         self.action_pointer = 0
         self.defined_actions = defined_actions
 
@@ -67,7 +68,7 @@ class Decoder:
             return "l"
 
 def test_decoder():
-    DEFINED_ACTIONS = ['l', 'r', 'b', 'f']
+    DEFINED_ACTIONS = ['l', 'r', 'b', 'f', 't']
     decoder = Decoder('llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u', DEFINED_ACTIONS)
 
     print(decoder.actions)

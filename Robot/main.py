@@ -52,9 +52,12 @@ def main():
 
 
     # setup decoder and define chain of actions
-    #string_of_actions = "fflfrflfffrffr"
+    #string_of_actions = "uuuuuu"
     #string_of_actions = "fffblfrffrfrffb" #"ffffrfrfrfblfflffrflfb"
-    string_of_actions = "llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u"
+    #string_of_actions = "llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u"
+    string_of_actions = "lffffrffbtffrffrfrffffffbrflflfffbrflfflfflflfffbtflffrffrflffbrfflfflflffblfrffffbtflfflffblffbrflffffbrflflfffbrflfflfflflffblfrfrffbtfrffrfrffbrflfflfffrffffrffrfrffbrflflffffbrflflfffbtfrfffflfrffrfrffffffbrflflff"
+    #string_of_actions = "fbrflflff"
+    
     decoder = Decoder(string_of_actions, DEFINED_ACTIONS)
 
 
@@ -63,16 +66,16 @@ def main():
 
     while current_action != NOT_DEFINED: # current action == -1 -> no more actions to execute
 
-#        if(current_action == FORWARD):
-#            move_forward(mDiff, colorSensorStop, colorSensorFollow)
-#            current_action = decoder.get_next_action()
+        if(current_action == FORWARD):
+            move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight)
+            current_action = decoder.get_next_action()
         #if(current_action == FORWARD_GYRO):
         #    move_forward_gyro(mDiff, colorSensorStop, colorSensorFollow, gyro)
         #    current_action = decoder.get_next_action()
 
-        if(current_action == FORWARD):
-            move_forward_dual(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight)
-            current_action = decoder.get_next_action()
+#        if(current_action == FORWARD):
+#            move_forward_dual(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight)
+#            current_action = decoder.get_next_action()
 
         elif(current_action == BACKWARD):
             move_backward(mDiff, colorSensorStop)

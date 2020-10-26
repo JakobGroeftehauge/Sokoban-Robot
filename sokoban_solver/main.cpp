@@ -146,6 +146,7 @@ int main()
 
 
     std::vector<char> solution;
+    std::vector<sokoban_state> state_solution;
 
     Node* temp_node = completed_node;
     while(temp_node->parent_state != NULL)
@@ -154,8 +155,10 @@ int main()
         if(!crate_position_not_changed(temp_node->state, temp_node->parent_state->state))
         {
             solution.push_back('.');
+
         }
         //std::cout << temp_node->action_to_current_state() << std::endl;
+        state_solution.push_back(temp_node->state);
         temp_node = temp_node->parent_state;
     }
 
@@ -163,12 +166,22 @@ int main()
     std::cout << "Number of steps in solution:" << solution.size() << std::endl;
 
     std::reverse(solution.begin(), solution.end());
+    std::reverse(state_solution.begin(), state_solution.end());
 
     for(unsigned int i = 0; i < solution.size(); i++)
     {
         std::cout << solution[i];
     }
+
     std::cout << std::endl;
+    for(unsigned int i = 0; i < state_solution.size(); i++)
+    {
+        std::cout << "state " << i << std::endl;
+        env.print_map(state_solution[i]);
+    }
+
+
+
 
     return 0;
 }

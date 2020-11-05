@@ -7,12 +7,13 @@ spkr = Sound()
 THRESHOLD_LINE = 35
 DRIVE_SPEED = 40
 STOP_SPEED = 0
-TURN_SPEED = 50
+TURN_SPEED = 50 #50    ,175 is max
 TURN_ANGLE = 153
 BRAKE_DISTANCE = 30
 BRAKE_SPEED = 900
 GEARING = 1.566667
-STOP_LINE = 40
+STOP_LINE = 45 #40
+BRAKE_DIST = 0.7
 
 def bin_val(val, threshold):
     if val < threshold:
@@ -29,7 +30,7 @@ def sign(val):
 def turn_left(mDiff):
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
-    rotations = 0.7 #0.6
+    rotations = BRAKE_DIST #0.6
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
     mDiff.turn_left(SpeedRPM(TURN_SPEED), 90) #96
@@ -38,7 +39,7 @@ def turn_left(mDiff):
 def turn_right(mDiff):
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
-    rotations = 0.7 #0.6
+    rotations = BRAKE_DIST #0.6
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
     mDiff.turn_right(SpeedRPM(TURN_SPEED), 90) #96
@@ -47,13 +48,13 @@ def turn_right(mDiff):
 def turn_one_eighty(mDiff):
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
-    rotations = 0.7
+    rotations = BRAKE_DIST
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
     mDiff.turn_left(SpeedRPM(TURN_SPEED), 180) #183
 
 def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
-
+    #f = open("speedtest.csv", "a")
     off_line_count_max = 2000000000
     sleep_time = 0.001
     kp=1.2
@@ -99,7 +100,7 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
 #        else:
 #            off_line_count = 0
 
-
+        #f.write(str(colorSensorStop.reflected_light_intensity) + ", ")
         if colorSensorStop.reflected_light_intensity < STOP_LINE:
             break
 
@@ -112,6 +113,7 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
             raise LineFollowErrorTooFast("The robot is moving too fast to follow the line")
 
     mDiff.stop()
+    #f.close()
 #    spkr.beep()
 
 
@@ -121,7 +123,7 @@ def move_backward(mDiff, colorSensorStop):
     speed = SpeedPercent(-DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
 
-    rotations = 0.7
+    rotations = BRAKE_DIST
     mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
     mDiff.on(speed, speed)
@@ -142,7 +144,7 @@ def move_backward(mDiff, colorSensorStop):
 
 def move_forward_dual(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
     status = True
-    f = open("stopsensortest_high_can.csv", "a")
+    f = open("stopsensortest.csv", "a")
 
     speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)

@@ -52,12 +52,12 @@ def main():
 
 
     # setup decoder and define chain of actions
-    #string_of_actions = "uuuuuu"
+    #string_of_actions = "urrruulldddl"
     #string_of_actions = "fffblfrffrfrffb" #"ffffrfrfrfblfflffrflfb"
     string_of_actions = "llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u"
     #string_of_actions = "lffffrffbtffrffrfrffffffbrflflfffbrflfflfflflfffbtflffrffrflffbrfflfflflffblfrffffbtflfflffblffbrflffffbrflflfffbrflfflfflflffblfrfrffbtfrffrfrffbrflfflfffrffffrffrfrffbrflflffffbrflflfffbtfrfffflfrffrfrffffffbrflflff"
     #string_of_actions = "lfffrfflf"
-    #string_of_actions = "t"
+    #string_of_actions = "l"
 
     decoder = Decoder(string_of_actions, DEFINED_ACTIONS)
 
@@ -103,3 +103,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    mDiff.stop()

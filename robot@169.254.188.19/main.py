@@ -18,7 +18,7 @@ ONE_EIGHTY = "t"
 CONTINUE = "c"
 NOT_DEFINED = -1
 
-DEFINED_ACTIONS = [FORWARD, LEFT, RIGHT, BACKWARD, ONE_EIGHTY, CONTINUE]
+DEFINED_ACTIONS = [FORWARD, LEFT, RIGHT, BACKWARD, ONE_EIGHTY]
 
 
 
@@ -59,12 +59,12 @@ def main():
     #string_of_actions = "lffffrffbtffrffrfrffffffbrflflfffbrflfflfflflfffbtflffrffrflffbrfflfflflffblfrffffbtflfflffblffbrflffffbrflflfffbrflfflfflflffblfrfrffbtfrffrfrffbrflfflfffrffffrffrfrffbrflflffffbrflflfffbtfrfffflfrffrfrffffffbrflflff"
     #string_of_actions = "lfffrfflf"
     #string_of_actions = "l"
-    #string_of_actions = "uurddluurddl"
-    #string_of_actions = "uuuuuu"
 
     decoder = Decoder(string_of_actions, DEFINED_ACTIONS)
 
+
     current_action = decoder.get_next_action()
+
 
     while current_action != NOT_DEFINED: # current action == -1 -> no more actions to execute
 

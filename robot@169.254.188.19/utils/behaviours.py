@@ -5,7 +5,7 @@ from ev3dev2.sound import Sound
 spkr = Sound()
 
 THRESHOLD_LINE = 35
-DRIVE_SPEED = 55
+DRIVE_SPEED = 45
 STOP_SPEED = 0
 TURN_SPEED = 100 #50    ,175 is max
 TURN_ANGLE = 153
@@ -14,9 +14,6 @@ BRAKE_SPEED = 900
 GEARING = 1.566667
 STOP_LINE = 45 #40
 BRAKE_DIST = 0.7
-kp=5 #12
-ki=0
-kd=0.1
 
 def bin_val(val, threshold):
     if val < threshold:
@@ -58,42 +55,40 @@ def turn_one_eighty(mDiff):
 
 def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
     #f = open("speedtest.csv", "a")
-    f = open("stopsensortest2.csv", "a")
     off_line_count_max = 2000000000
     sleep_time = 0.001
+    kp=1.2
+    ki=0
+    kd=0.1
     white = 80
     integral = 0.0
     last_error = 0.0
     derivative = 0.0
     off_line_count = 0
     target_light_intensity = 37
-    speed = SpeedPercent(45)
+    speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
     speed_native_units = speed.to_native_units(mDiff.left_motor)
-    has_seen_white = False
-    #rotations = 0.1
-    #mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
+
+    rotations = 0.1
+    mDiff.on_for_rotations(speed, speed, rotations, brake=False, block=True)
 
     while True:
-        if(colorSensorStop.reflected_light_intensity > STOP_LINE):
-            has_seen_white = True
-
         error = colorSensorLeft.value() - colorSensorRight.value() #target_light_intensity - reflected_light_intensity
         integral = integral + error
         derivative = error - last_error
         last_error = error
         turn_native_units = (kp * error) + (ki * integral) + (kd * derivative)
 
+        left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
+        right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
 
-#        left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
-#        right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
-
-        if turn_native_units > 0:
-            left_speed = SpeedNativeUnits(speed_native_units)
-            right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
-        else:
-            left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
-            right_speed = SpeedNativeUnits(speed_native_units)
+#        if turn_native_units > 0:
+#            left_speed = SpeedNativeUnits(speed_native_units)
+#            right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
+#        else:
+#            left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
+#            right_speed = SpeedNativeUnits(speed_native_units)
 
         # Have we lost the line?
 #        if reflected_light_intensity >= white:
@@ -105,8 +100,8 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
 #        else:
 #            off_line_count = 0
 
-        f.write(str(colorSensorStop.reflected_light_intensity) + ", ")
-        if(colorSensorStop.reflected_light_intensity < STOP_LINE  and has_seen_white):
+        #f.write(str(colorSensorStop.reflected_light_intensity) + ", ")
+        if colorSensorStop.reflected_light_intensity < STOP_LINE:
             break
 
         #time.sleep(sleep_time)
@@ -118,7 +113,7 @@ def move_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
             raise LineFollowErrorTooFast("The robot is moving too fast to follow the line")
 
     mDiff.stop()
-    f.close()
+    #f.close()
 #    spkr.beep()
 
 
@@ -175,41 +170,29 @@ def move_forward_dual(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight)
 
 
 def cont_forward(mDiff, colorSensorStop, colorSensorLeft, colorSensorRight):
-    f = open("stopsensortest2.csv", "a")
+    kp=1.2
+    ki=0
+    kd=0.1
     white = 80
     integral = 0.0
     last_error = 0.0
     derivative = 0.0
     target_light_intensity = 37
-    speed = SpeedPercent(55)
+    speed = SpeedPercent(DRIVE_SPEED)
     speed = speed_to_speedvalue(speed)
     speed_native_units = speed.to_native_units(mDiff.left_motor)
-    has_seen_white = False
 
     while True:
-        if(colorSensorStop.reflected_light_intensity > STOP_LINE):
-            has_seen_white = True
-
-
         error = colorSensorLeft.value() - colorSensorRight.value()
         integral = integral + error
         derivative = error - last_error
         last_error = error
         turn_native_units = (kp * error) + (ki * integral) + (kd * derivative)
 
-        #left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
-        #right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
+        left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
+        right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
 
-        if turn_native_units > 0:
-            left_speed = SpeedNativeUnits(speed_native_units)
-            right_speed = SpeedNativeUnits(speed_native_units - turn_native_units)
-        else:
-            left_speed = SpeedNativeUnits(speed_native_units + turn_native_units)
-            right_speed = SpeedNativeUnits(speed_native_units)
-
-        f.write(str(colorSensorStop.reflected_light_intensity) + ", ")
-        if(colorSensorStop.reflected_light_intensity < STOP_LINE and has_seen_white):
+        if colorSensorStop.reflected_light_intensity < STOP_LINE:
             break
 
         mDiff.on(left_speed, right_speed)
-    f.close()

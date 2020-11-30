@@ -43,15 +43,13 @@ class Decoder:
             current_direction = actions[i]
             i = i + 1
 
-        output_list_action = ""
-        for i in range(len(expanded_list_actions) - 1):
+        for i in range(len(actions) - 1):
             temp_action = ""
-            if(expanded_list_actions[i] == "f" and expanded_list_actions[i + 1] == "f"):
-                output_list_action = output_list_action + "c"
-            else:
-                output_list_action = output_list_action + expanded_list_actions[i]
 
-        return output_list_action + "f"
+            if(actions[i] == "f" && actions[i+1] == "f"):
+                expanded_list_actions[i] = "c"
+
+        return expanded_list_actions
 
     def get_action(self, current_direction, wanted_direction):
         """
@@ -79,7 +77,7 @@ class Decoder:
             return "l"
 
 def test_decoder():
-    DEFINED_ACTIONS = ['l', 'r', 'b', 'f', 't', 'c']
+    DEFINED_ACTIONS = ['l', 'r', 'b', 'f', 't']
     decoder = Decoder('llll.uddllu.r.r.r.r.rdr.u.uruulld.r.rlddllu.luulld.rur.d.dull.d.rd.r.r.rdr.u.uruurrd.lul.dulld.rddlllluur.dld.r.r.rdr.u.udlllldllu.r.r.r.r.rdr.u', DEFINED_ACTIONS)
 
     print(decoder.actions)

@@ -14,10 +14,10 @@ using namespace std;
 //std::vector<std::vector<char>> map = {
 //    {'X','X','X','X','X','X','X','X','X','X','X','X'},
 //    {'X','X','.','.','.','X','.','.','.','.','.','X'},
-//    {'X','X','.','.','.','X','.','.','.','.','.','X'},
-//    {'X','X','.','.','.','.','X','.','.','X','X','X'},
+//    {'X','X','.','.','.','.','.','.','.','.','.','X'},
+//    {'X','X','.','.','.','X','X','.','.','X','X','X'},
+//    {'X','.','.','.','.','X','.','.','X','X','X','X'},
 //    {'X','.','.','.','.','.','.','.','X','X','X','X'},
-//    {'X','.','.','.','X','.','.','.','X','X','X','X'},
 //    {'X','X','X','X','X','X','X','X','X','X','X','X'}};
 
 
@@ -52,19 +52,29 @@ bool crate_position_not_changed(sokoban_state state1, sokoban_state state2)
 
 int main()
 {
+//    std::vector<std::vector<char>> map = {
+//        {'X','X','X','X','X','X','X','X','X','X','X','X'},
+//        {'X','X','.','.','.','X','.','.','.','.','.','X'},
+//        {'X','X','.','.','.','X','.','.','.','.','.','X'},
+//        {'X','X','.','.','.','.','X','.','.','X','X','X'},
+//        {'X','.','.','.','.','.','.','.','X','X','X','X'},
+//        {'X','.','.','.','X','.','.','.','X','X','X','X'},
+//        {'X','X','X','X','X','X','X','X','X','X','X','X'}};
+
     std::vector<std::vector<char>> map = {
         {'X','X','X','X','X','X','X','X','X','X','X','X'},
         {'X','X','.','.','.','X','.','.','.','.','.','X'},
-        {'X','X','.','.','.','X','.','.','.','.','.','X'},
-        {'X','X','.','.','.','.','X','.','.','X','X','X'},
+        {'X','X','.','.','.','.','.','.','.','.','.','X'},
+        {'X','X','.','.','.','X','X','.','.','.','X','X'},
+        {'X','.','.','.','.','X','.','.','X','X','X','X'},
         {'X','.','.','.','.','.','.','.','X','X','X','X'},
-        {'X','.','.','.','X','.','.','.','X','X','X','X'},
         {'X','X','X','X','X','X','X','X','X','X','X','X'}};
 
 
     /*the reference frame for the coordinates is placed in the top left corner with the positive x-axis
      point downwards and the positive y-axis pointing towards right. The upper left corner is coordinate (0,0)*/
-    std::vector<coordinate> storage_zones = {coordinate(2, 7), coordinate(2, 8), coordinate(3, 7), coordinate(3, 8) };
+    //std::vector<coordinate> storage_zones = {coordinate(2, 7), coordinate(2, 8), coordinate(3, 7), coordinate(3, 8) };
+    std::vector<coordinate> storage_zones = {coordinate(4, 2), coordinate(4, 3), coordinate(3, 2), coordinate(3, 3) };
 
     std::vector<string> actions = {"left", "left", "left", "left", "up", "down", "right", "right", "up", "left", "down", "left", "down", "left", "left", "up", "right", "right", "right", "right", "right", "down", "right", "up", "up", "right", "up", "up", "left", "left", "down", "right", "right", "down", "left", "down", "left", "left", "up", "left", "up", "up", "left", "left", "down", "right", "up", "right", "down", "down",
                                    "right", "down", "left", "left", "down", "left", "left", "up", "right", "right", "right", "right", "right", "down", "right", "up", "up", "right", "up", "up", "left", "left", "down", "right", "up", "right", "down", "up", "right", "right", "down", "left", "up", "left", "left", "down", "down", "down", "left", "left", "up", "left", "up", "left", "down", "right", "down", "left", "down", "left",
@@ -73,11 +83,13 @@ int main()
 
     sokoban_map env(map, storage_zones);
 
-    std::vector<coordinate> box_positions = {coordinate(3, 3), coordinate(3, 4), coordinate(3, 2), coordinate(4, 2)};
-    coordinate start_pos(4, 7);
+    std::vector<coordinate> box_positions = {coordinate(2, 6), coordinate(3, 7), coordinate(2, 8), coordinate(2, 9)};
+    coordinate start_pos(1, 10);
+//    std::vector<coordinate> box_positions = {coordinate(3, 3), coordinate(3, 4), coordinate(3, 2), coordinate(4, 2)};
+//    coordinate start_pos(4, 7);
 
     sokoban_state current_state(start_pos, box_positions);
-
+    env.print_map(current_state);
     std::unordered_set<std::string> prev_expanded_states;
     std::queue<Node*> queue_unexpanded_nodes;
 
